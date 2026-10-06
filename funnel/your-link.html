@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your Interview Edge referral link</title><link rel="stylesheet" href="edge.css">
+<style>.top{padding:80px 0 40px;max-width:640px}.box{border-top:1px solid var(--ink);max-width:640px;padding:28px 0}.code{font:600 28px/1 Inter,sans-serif;letter-spacing:.08em;margin:12px 0 20px}form{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0}input{font:400 16px/1 Inter,sans-serif;padding:16px;border:1px solid var(--ink);background:#fff;min-width:260px;flex:1}button,.go{font:600 13px/1 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:16px 22px;border:1px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer;text-decoration:none;display:inline-block}.stats{margin:18px 0;font:400 16px/1.7 Inter,sans-serif}#res{display:none}@media(max-width:820px){.wrap,.mast div,footer div{padding-left:22px;padding-right:22px}.top{padding:52px 0 32px}.tag{display:none}}</style></head><body>
+<header class="mast"><div><span class="brand">Interview <i>Edge</i></span><span class="tag">By Caxton Wealth</span></div></header><main class="wrap">
+<section class="top"><p class="eyebrow">Members</p><h1>Your referral link.</h1><p class="lede">Enter the email you joined Interview Edge with. You get your own code, your share link and your numbers.</p></section>
+<section class="box"><form id="f"><input id="em" type="email" placeholder="you@example.com" required autocomplete="email"><button type="submit">Show my link</button></form>
+<p class="fine" id="msg"></p>
+<div id="res"><p class="fine">Your code</p><div class="code" id="code"></div><p class="stats" id="stats"></p><a class="go" id="go" href="#">Share with a friend</a></div>
+<p class="fine" style="margin-top:24px">Your friend gets their first month for $1 with your code. When they stay on for their second month, your next $8 month is free.</p></section>
+<script>
+var SHEET="1pXvDy_yNAHHxFQ2dfurBM2ZYyAsOL5McHEdeqkGJbpc";
+async function hash(e){var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(e.trim().toLowerCase()));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
+document.getElementById("f").onsubmit=async function(ev){ev.preventDefault();var m=document.getElementById("msg"),r=document.getElementById("res");r.style.display="none";m.textContent="Looking...";
+var h=await hash(document.getElementById("em").value);
+window.cbk=function(d){var row=d&&d.table&&d.table.rows&&d.table.rows[0];
+if(!row||!row.c||!row.c[1]||!row.c[1].v){m.textContent="We could not show a link for that email. Use the email you joined with, or reply to any Interview Edge email and we will sort it.";return}
+var c=String(row.c[1].v).replace(/[^A-Za-z0-9-]/g,"").toUpperCase(),n=function(i){return row.c[i]&&row.c[i].v!=null?row.c[i].v:0};
+m.textContent="";document.getElementById("code").textContent=c;
+document.getElementById("stats").innerHTML="Friends joined: "+n(2)+"<br>Free months earned: "+n(3)+"<br>Free months applied: "+n(4);
+document.getElementById("go").href="share.html?ref="+c;r.style.display="block"};
+var s=document.createElement("script");s.onerror=function(){m.textContent="Something went wrong. Try again in a minute."};
+s.src="https://docs.google.com/spreadsheets/d/"+SHEET+"/gviz/tq?tqx=responseHandler:cbk&sheet=Lookup&tq="+encodeURIComponent("select * where A='"+h+"'");document.body.appendChild(s)};
+</script>
+</main><footer><div>Caxton Wealth, 12 Hay Hill, Mayfair, London W1J 8NR.</div></footer></body></html>
