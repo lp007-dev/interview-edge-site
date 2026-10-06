@@ -11,13 +11,13 @@ var SHEET="1pXvDy_yNAHHxFQ2dfurBM2ZYyAsOL5McHEdeqkGJbpc";
 async function hash(e){var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(e.trim().toLowerCase()));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
 document.getElementById("f").onsubmit=async function(ev){ev.preventDefault();var m=document.getElementById("msg"),r=document.getElementById("res");r.style.display="none";m.textContent="Looking...";
 var h=await hash(document.getElementById("em").value);
-window.cbk=function(d){var row=d&&d.table&&d.table.rows&&d.table.rows[0];
+var show=function(d){var row=d&&d.table&&d.table.rows&&d.table.rows[0];
 if(!row||!row.c||!row.c[1]||!row.c[1].v){m.textContent="We could not show a link for that email. Use the email you joined with, or reply to any Interview Edge email and we will sort it.";return}
 var c=String(row.c[1].v).replace(/[^A-Za-z0-9-]/g,"").toUpperCase(),n=function(i){return row.c[i]&&row.c[i].v!=null?row.c[i].v:0};
 m.textContent="";document.getElementById("code").textContent=c;
 document.getElementById("stats").innerHTML="Friends joined: "+n(2)+"<br>Free months earned: "+n(3)+"<br>Free months applied: "+n(4);
 document.getElementById("go").href="share.html?ref="+c;r.style.display="block"};
-var s=document.createElement("script");s.onerror=function(){m.textContent="Something went wrong. Try again in a minute."};
-s.src="https://docs.google.com/spreadsheets/d/"+SHEET+"/gviz/tq?tqx=responseHandler:cbk&sheet=Lookup&tq="+encodeURIComponent("select * where A='"+h+"'");document.body.appendChild(s)};
+try{var u="https://docs.google.com/spreadsheets/d/"+SHEET+"/gviz/tq?tqx=out:json&sheet=Lookup&tq="+encodeURIComponent("select * where A='"+h+"'");
+var t=await (await fetch(u)).text();show(JSON.parse(t.slice(t.indexOf("{"),t.lastIndexOf("}")+1)))}catch(e){m.textContent="Something went wrong. Try again in a minute."}};
 </script>
 </main><footer><div>Caxton Wealth, 12 Hay Hill, Mayfair, London W1J 8NR.</div></footer></body></html>
