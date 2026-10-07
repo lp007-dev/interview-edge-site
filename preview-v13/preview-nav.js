@@ -1,5 +1,5 @@
 (() => {
- const steps = [['index.html','Free sample'],['downloads.html','Sample'],['offer.html','Interview Edge'],['checkout.html','Payhip checkout'],['welcome.html','Welcome']];
+ const steps = [['index.html','Free sheet'],['downloads.html','Downloads'],['offer.html','Interview Edge'],['checkout.html','Payhip checkout'],['welcome.html','Welcome']];
  const file = location.pathname.split('/').pop() || 'index.html';
  const i = Math.max(0, steps.findIndex(s => s[0] === file));
  const nav = document.createElement('nav');
